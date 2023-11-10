@@ -8,6 +8,8 @@ export default defineConfig({
   plugins: [
     vue()
   ],
+  base: '/2023thef2e-week1/',
+  publicPath: process.env.NODE_ENV === 'production' ? '/2023thef2e-week1/' : '/',
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

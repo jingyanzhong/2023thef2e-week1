@@ -1,6 +1,11 @@
 <script setup>
 const props = defineProps(['cardItem'])
 console.log(props.cardItem)
+
+const getImageUrl = (imgSrc) => {
+  const path = new URL(`/src/img/${imgSrc}`, import.meta.url).href
+  return path
+}
 </script>
 <template>
     <li v-for="(item, index) in cardItem" :key="index">
@@ -11,7 +16,7 @@ console.log(props.cardItem)
             </div>
             <h5>{{ item.title }} <br> {{ item.title2 }}</h5>
         </div>
-        <img :src="`src/img/${item.img}`" :alt="item.title">
+        <img :src="getImageUrl(item.img)" :alt="item.title">
         <p>{{ item.content }}</p>
     </li>
 </template>

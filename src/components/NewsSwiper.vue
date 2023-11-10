@@ -10,7 +10,7 @@
                 </div>
                 <h5>{{ item.title }}<br>{{ item.title2 }}</h5>
             </div>
-            <img :src="`src/img/${item.img}`" :alt="item.title">
+            <img :src="getImageUrl(item.img)" :alt="item.title">
             <p>{{ item.content }}</p>
         </swiper-slide>
     </swiper>
@@ -42,6 +42,11 @@ const breakpoints = ref({
 
 const props = defineProps(['cardItem'])
 console.log(props.cardItem)
+
+const getImageUrl = (imgSrc) => {
+  const path = new URL(`/src/img/${imgSrc}`, import.meta.url).href
+  return path
+}
 </script>
 
 <style lang="scss" scoped>
