@@ -1,15 +1,35 @@
-![image](https://images.thef2e.com//works/713_2023-10-31T23:14:23.100Z.png)
-# 2023THE F2E 立委競選官網
-菜鳥前端工程師的修練之路  
-要先謝謝YR大大提供的UI設計稿:D  
-  
-__本次使用到的技術:__  
-‧ vue3  
-‧ vite  
-‧ pinia  
-‧ scss  
-‧ bootstrap  
-  
-__運用的js plugins:__  
-‧ swiper  
-‧ aos  
+# 2023thef2e-week01
+
+This template should help get you started developing with Vue 3 in Vite.
+
+## Recommended IDE Setup
+
+[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur) + [TypeScript Vue Plugin (Volar)](https://marketplace.visualstudio.com/items?itemName=Vue.vscode-typescript-vue-plugin).
+
+## Customize configuration
+
+See [Vite Configuration Reference](https://vitejs.dev/config/).
+
+## Project Setup
+
+```sh
+npm install
+```
+
+### Compile and Hot-Reload for Development
+
+```sh
+npm run dev
+```
+
+### Compile and Minify for Production
+
+```sh
+npm run build
+```
+
+### Lint with [ESLint](https://eslint.org/)
+
+```sh
+npm run lint
+```

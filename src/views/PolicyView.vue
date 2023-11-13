@@ -36,9 +36,9 @@ const listData = ref([{
     margin: 80px 0;
 
     h2 {
-        font-size: 48px;
-        font-weight: bold;
-        text-align: center;
+        font-size: $fz-3xl;
+        font-weight: $fw-bold;
+        text-align: $text-center;
         padding: 42px 0;
         background: #fff;
         border-radius: 100px;
@@ -47,4 +47,21 @@ const listData = ref([{
     .content {
         margin-top: 80px;
     }
-}</style>
+}
+
+@media (max-width: 767px) {
+    .policy {
+        margin: 20px 0;
+        h2 {
+            font-size: $fz-l;
+            padding: 20px 0;
+            letter-spacing: $text-spacing-m;
+            text-indent: 16px;
+            margin-bottom: 0;
+        }
+        .content {
+        margin-top: 40px;
+    }
+    }
+}
+</style>

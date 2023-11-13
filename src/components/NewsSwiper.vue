@@ -53,20 +53,22 @@ const getImageUrl = (imgSrc) => {
 .newsSwiper {
     padding-bottom: 30px;
 }
+
 .title {
-    display: flex;
-    align-items: center;
+    display: $d-flex;
+    align-items: $align-center;
 
     .date {
-        background: rgba(200, 115, 54, 1);
+        background: $primary;
         padding: 8px 25px 8px 25px;
         color: #fff;
-        text-align: center;
+        text-align: $text-center;
         margin-right: auto;
 
         .num {
-            font-size: 48px;
-            font-weight: bold;
+            font-size: $fz-3xl;
+            line-height: $line-h-xl;
+            font-weight: $fw-bold;
             position: relative;
             z-index: 2;
 
@@ -79,15 +81,18 @@ const getImageUrl = (imgSrc) => {
             }
 
         }
+
         p {
             padding: 0;
+            margin: 0;
         }
     }
 }
 
 h5 {
-    font-size: 18px;
-    letter-spacing: 8px;
+    font-size: $fz-l;
+    letter-spacing: $text-spacing-s;
+    line-height: $line-h-m;
     text-align: end;
 }
 
@@ -96,26 +101,60 @@ img {
 }
 
 p {
-    line-height: 1.8;
+    font-size: $fz-m;
+    line-height: $line-h-m;
     padding: 20px 16px;
 }
+
 @media (max-width: 768px) {
     .title {
-    .date {
-        padding: 8px 20px;
+        .date {
+            padding: 8px 20px;
 
-        .num {
-            font-size: 36px;
+            .num {
+                font-size: $fz-xxl;
+                line-height: $line-h-l;
+            }
         }
+    }
+
+    h5 {
+        letter-spacing: 6px;
+    }
+
+    p {
+        padding: 16px 0;
     }
 }
 
-h5 {
-    letter-spacing: 6px;
-}
+@media (max-width: 767px) {
+    .title {
+        flex-direction: column;
 
-p {
-    padding: 16px 8px;
-}
-}
-</style>
+        .date {
+            margin-right: 0;
+            margin-bottom: 12px;
+
+            .num {
+                font-size: 20px;
+                line-height: $line-h-m;
+            }
+
+            p {
+                margin: 0;
+                font-size: $fz-s;
+            }
+        }
+    }
+
+    h5 {
+        font-size: $fz-m;
+        margin-bottom: 16px;
+        text-align: $text-center;
+    }
+
+    p {
+        padding: 0;
+        margin-top: 16px;
+    }
+}</style>

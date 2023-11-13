@@ -6,11 +6,11 @@
             <h5>{{ item.title }}</h5>
             <div class="content">
                 <div class="money">
-                    <p>NT${{ item.money }}</p>
+                    <p :data-num="`NT$${item.money}`">NT${{ item.money }}</p>
                     <p>每次捐款金額</p>
                 </div>
                 <div class="people">
-                    <p>{{ item.people }}</p>
+                    <p :data-num="`${item.people}`">{{ item.people }}</p>
                     <p>贊助人數</p>
                 </div>
             </div>
@@ -49,51 +49,74 @@ console.log(props.danteItem)
 <style lang="scss" scoped>
 .danteSwiper {
     padding-bottom: 50px;
+
     .swiper-slide {
-        background: rgba(200, 115, 54, 1);
+        background: $primary;
         color: #fff;
         border-radius: 12px 12px 0 0;
         padding: 20px;
 
         h5 {
             font-size: 28px;
-            font-weight: bold;
-            text-align: center;
+            font-weight: $fw-bold;
+            text-align: $text-center;
             margin-bottom: 24px;
         }
 
         .content {
-            display: flex;
+            display: $d-flex;
             justify-content: space-between;
             padding: 24px 38px;
-            text-align: center;
+            text-align: $text-center;
 
             p {
                 text-wrap: nowrap;
-                font-size: 48px;
-                font-weight: bold;
+                font-size: $fz-3xl;
+                font-weight: $fw-black;
                 margin-bottom: 16px;
+                position: relative;
+                color: $primary;
+
+                &::before {
+                    content: attr(data-num);
+                    position: absolute;
+                    z-index: -1;
+                    -webkit-text-stroke: 6px #fff;
+                    text-stroke: 6px #fff;
+                }
 
                 &:nth-last-child(1) {
-                    font-size: 14px;
-                    font-weight: bold;
+                    font-size: $fz-s;
+                    font-weight: $fw-bold;
+                    color: #fff;
                 }
             }
         }
     }
 }
+
 @media (max-width: 767px) {
     .danteSwiper {
-    .swiper-slide {
-        padding: 16px;
-        .content {
-            padding: 8px;
+        .swiper-slide {
+            padding: 16px;
 
-            p {
-                font-size: 36px;
+            h5 {
+                font-size: 20px;
+                font-weight: 400;
+                letter-spacing: $text-spacing-m;
+                line-height: $line-h-m;
+                text-indent: 28px;
+                margin-bottom: 20px;
+            }
+
+            .content {
+                padding: 8px;
+
+                p {
+                    font-size: $fz-xxl;
+                }
             }
         }
     }
-}
 }
 </style>

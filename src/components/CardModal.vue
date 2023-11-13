@@ -77,7 +77,7 @@ const closeModal = () => {
         margin-bottom: 16px;
         padding: 8px;
         border-radius: 10px;
-        border: 1px solid rgba(69, 69, 69, 1);
+        border: 1px solid $gray;
     }
 }
 </style>

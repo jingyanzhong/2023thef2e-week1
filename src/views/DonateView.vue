@@ -33,12 +33,12 @@ const hideCard = () => {
         <header>
             <div class="title">
                 <h2>您的小筆捐款是<br>每隻毛孩<br>未來的大大動力！</h2>
-                <RouterLink to="/dante">小額捐款
+                <RouterLink to="/dante" class="default-btn">小額捐款
                     <span class="material-icons material-symbols-outlined">arrow_right</span>
                 </RouterLink>
             </div>
             <div class="badge">
-                <p>987,655,873</p>
+                <p data-text="987,655,873">987,655,873</p>
                 <span>總金額</span>
             </div>
         </header>
@@ -49,7 +49,7 @@ const hideCard = () => {
         </main>
     </div>
     <CardModal ref="cardModal" :card-item="danteItem" @close-modal="closeModal"></CardModal>
-    <div class="card thanksCard" :class="{'d-none' : !isShow}">
+    <div class="card thanksCard" :class="{ 'd-none': !isShow }">
         <div class="card-body">
             <button type="button" class="btn-close" @click="hideCard"></button><br>
             <img src="../img/icon4.png" alt="icon4">
@@ -87,52 +87,51 @@ const hideCard = () => {
 }
 
 header {
-    display: flex;
+    display: $d-flex;
     flex-direction: column;
     align-items: end;
     padding: 144px 192px 0 0;
 }
 
 .title {
-    display: flex;
+    display: $d-flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: $align-center;
+    text-align: $text-center;
     margin-bottom: 338px;
 
     h2 {
         font-size: 32px;
-        font-weight: bold;
-        letter-spacing: 16px;
+        font-weight: $fw-bold;
+        letter-spacing: $text-spacing-m;
         margin-bottom: 24px;
-    }
-
-    a {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 8px 0;
-        width: 180px;
-        border-radius: 50px;
-        color: #fff;
-        background: rgba(16, 94, 167, 1);
     }
 }
 
 .badge {
     border-radius: 8px 8px 0 0;
-    background: rgba(228, 211, 204, 1);
+    background: $info;
     padding: 24px 60px;
-    color: rgba(200, 115, 54, 1);
+    color: $primary;
 
     p {
-        font-size: 48px;
-        font-weight: bold;
+        font-size: $fz-3xl;
+        font-weight: $fw-black;
+        position: relative;
+        z-index: 1;
+
+        &::before {
+            content: attr(data-text);
+            position: absolute;
+            z-index: -1;
+            -webkit-text-stroke: 8px #fff;
+            text-stroke: 8px #fff;
+        }
     }
 
     span {
-        font-size: 14px;
-        font-weight: bold;
+        font-size: $fz-s;
+        font-weight: $fw-bold;
     }
 }
 
@@ -142,7 +141,7 @@ main {
 
 @media (max-width: 768px) {
     header {
-        align-items: center;
+        align-items: $align-center;
         padding: 360px 0 0;
     }
 
@@ -152,20 +151,9 @@ main {
 
         h2 {
             font-size: 32px;
-            font-weight: bold;
-            letter-spacing: 16px;
+            font-weight: $fw-bold;
+            letter-spacing: $text-spacing-m;
             margin-bottom: 24px;
-        }
-
-        a {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 8px 0;
-            width: 180px;
-            border-radius: 50px;
-            color: #fff;
-            background: rgba(16, 94, 167, 1);
         }
     }
 
@@ -175,7 +163,7 @@ main {
         margin-bottom: 60px;
 
         p {
-            font-size: 36px;
+            font-size: $fz-xxl;
         }
     }
 
@@ -191,7 +179,7 @@ main {
 
     .title {
         h2 {
-            font-size: 24px;
+            font-size: $fz-xl;
             letter-spacing: 10px;
         }
     }
@@ -201,12 +189,17 @@ main {
         margin-bottom: 36px;
 
         p {
-            font-size: 24px;
+            font-size: $fz-xl;
+
+            &::before {
+            -webkit-text-stroke: 6px #fff;
+            text-stroke: 6px #fff;
+        }
         }
     }
 
     main {
-        padding: 80px 0;
+        padding: 40px 0;
     }
 }
 
@@ -217,13 +210,15 @@ main {
     left: 50%;
     z-index: 5;
     transform: translate(-50%, -50%);
-    text-align: center;
+    text-align: $text-center;
+
     p {
-        font-size: 48px;
-        font-weight: bold;
-        color: rgba(200, 115, 54, 1);
+        font-size: $fz-3xl;
+        font-weight: $fw-bold;
+        color: $primary;
         margin-top: 24px;
     }
+
     .btn-close {
         margin-bottom: 24px;
     }
@@ -231,13 +226,14 @@ main {
 
 @media (max-width: 767px) {
     .thanksCard {
-    padding: 16px;
-    img {
-        max-width: 260px;
+        padding: 16px;
+
+        img {
+            max-width: 260px;
+        }
+
+        p {
+            font-size: $fz-xxl;
+        }
     }
-    p {
-        font-size: 36px;
-    }
-}
-}
-</style>
+}</style>

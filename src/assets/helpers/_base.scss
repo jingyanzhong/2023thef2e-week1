@@ -15,11 +15,13 @@ body {
 .container {
     max-width: 1300px;
     margin: 0 auto;
+    padding: 0;
 }
 
 a {
     text-decoration: none;
 }
+
 .material-icons {
     font-family: 'Material Icons';
     font-weight: normal;
@@ -33,20 +35,51 @@ a {
     word-wrap: normal;
     white-space: nowrap;
     direction: ltr;
-  
+
     /* Support for all WebKit browsers. */
     -webkit-font-smoothing: antialiased;
     /* Support for Safari and Chrome. */
     text-rendering: optimizeLegibility;
-  
+
     /* Support for Firefox. */
     -moz-osx-font-smoothing: grayscale;
-  
+
     /* Support for IE. */
     font-feature-settings: 'liga';
-  }
+}
+
 .show-m {
     display: none !important;
+}
+
+.more-btn {
+    letter-spacing: $text-spacing-m;
+    color: rgba(69, 69, 69, 1);
+    transition: all .5s;
+    display: $d-flex;
+    align-items: $align-center;
+
+    &:hover {
+        color: $secondary;
+    }
+}
+
+.default-btn {
+    width: 180px;
+    display: $d-flex;
+    justify-content: $justify-center;
+    align-items: $align-center;
+    margin: 0 auto;
+    background: $secondary;
+    padding: 8px;
+    border-radius: 50px;
+    color: #fff;
+    text-align: $text-center;
+    transition: all .5s;
+
+    &:hover {
+        background: $primary;
+    }
 }
 
 @media (max-width: 767px) {
@@ -56,5 +89,9 @@ a {
 
     .show-m {
         display: block !important;
+    }
+
+    p {
+        font-size: 16px;
     }
 }

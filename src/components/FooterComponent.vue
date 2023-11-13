@@ -1,16 +1,22 @@
+<script setup>
+import { useIsActiveStore } from '../stores/isActive'
+const isActiveStore = useIsActiveStore()
+const { navActive } = isActiveStore
+</script>
+
 <template>
     <footer class="footer">
         <ul>
-            <li>
+            <li @click="navActive('/')">
                 <RouterLink to="/">首頁</RouterLink>
             </li>
-            <li>
+            <li @click="navActive('news')">
                 <RouterLink to="/news">最新活動</RouterLink>
             </li>
-            <li>
+            <li @click="navActive('policy')">
                 <RouterLink to="/policy">政策議題</RouterLink>
             </li>
-            <li>
+            <li @click="navActive('dante')">
                 <RouterLink to="/dante">小額捐款</RouterLink>
             </li>
         </ul>
@@ -35,18 +41,18 @@
 .footer {
     background: #fff;
     padding: 40px 0;
-    text-align: center;
+    text-align: $text-center;
 
     ul {
-        display: flex;
-        justify-content: center;
+        display: $d-flex;
+        justify-content: $justify-center;
         padding: 0 0 24px 0;
         margin-bottom: 0;
     }
 
     hr {
         width: 38%;
-        border-bottom: 1px dotted rgba(69, 69, 69, 1);
+        border-bottom: 1px dotted $gray;
         margin: 0 auto;
         margin-bottom: 24px;
     }
@@ -54,29 +60,29 @@
     a {
         display: block;
         font-size: 20px;
-        color: rgba(69, 69, 69, 1);
-        letter-spacing: 16px;
+        color: $gray;
+        letter-spacing: $text-spacing-m;
         margin: 0 30px;
         transition: all .5s;
 
         &:hover {
-            color: rgba(16, 94, 167, 1);
+            color: $secondary;
         }
     }
 
     p {
-        line-height: 1.8;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 16px;
+        line-height: $line-h-m;
+        display: $d-flex;
+        align-items: $align-center;
+        justify-content: $justify-center;
+        font-size: $fz-m;
         margin-bottom: 0;
         span {
             padding-right: 8px;
         }
 
         &:nth-last-child(1) {
-            font-size: 14px;
+            font-size: $fz-s;
             margin-top: 24px;
         }
     }
@@ -91,7 +97,7 @@
         }
 
         a {
-            font-size: 18px;
+            font-size: $fz-l;
             letter-spacing: 10px;
             margin: 0 24px;
         }
@@ -105,7 +111,7 @@
         }
 
         a {
-            font-size: 16px;
+            font-size: $fz-m;
             letter-spacing: 0;
             margin: 0 6px;
         }

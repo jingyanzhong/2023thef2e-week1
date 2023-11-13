@@ -1,5 +1,13 @@
 <script setup>
 import 'bootstrap/js/dist/collapse'
+import { useIsActiveStore } from '../stores/isActive'
+import { storeToRefs } from 'pinia'
+const isActiveStore = useIsActiveStore()
+const { isActive } = storeToRefs(isActiveStore)
+const hiddenNav = (active) => {
+  document.getElementById('navbarNav').classList.remove('show')
+  isActive.value = active
+}
 </script>
 
 <template>
@@ -10,18 +18,18 @@ import 'bootstrap/js/dist/collapse'
                 <span class="navbar-toggler-icon"></span>
             </button>
             <h1>
-                <RouterLink class="navbar-brand" to="/">喵立翰</RouterLink>
+                <RouterLink class="navbar-brand" to="/" @click="hiddenNav('/')">喵立翰</RouterLink>
             </h1>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <RouterLink class="nav-link" to="/news">最新活動</RouterLink>
+                    <li class="nav-item" @click="hiddenNav('news')">
+                        <RouterLink class="nav-link" to="/news" :class="{ 'active' : isActive === 'news' }">最新活動</RouterLink>
                     </li>
-                    <li class="nav-item">
-                        <RouterLink class="nav-link" to="/policy">政策議題</RouterLink>
+                    <li class="nav-item" @click="hiddenNav('policy')">
+                        <RouterLink class="nav-link" to="/policy" :class="{ 'active' : isActive === 'policy' }">政策議題</RouterLink>
                     </li>
-                    <li class="nav-item">
-                        <RouterLink class="nav-link" to="/dante">小額捐款</RouterLink>
+                    <li class="nav-item" @click="hiddenNav('dante')">
+                        <RouterLink class="nav-link" to="/dante" :class="{ 'active' : isActive === 'dante' }">小額捐款</RouterLink>
                     </li>
                 </ul>
             </div>
@@ -46,14 +54,15 @@ import 'bootstrap/js/dist/collapse'
   }
 
   a {
-    font-size: 24px;
-    color: rgba(69, 69, 69, 1);
-    letter-spacing: 8px;
+    font-size: $fz-xl;
+    color: $gray;
+    letter-spacing: $text-spacing-s;
     margin-left: 24px;
     transition: all .5s;
 
-    &:hover {
-      color: rgba(16, 94, 167, 1);
+    &:hover,
+    &.active {
+      color: $secondary !important;
     }
   }
 }
@@ -97,7 +106,7 @@ import 'bootstrap/js/dist/collapse'
       padding: 20px;
     }
     li {
-      text-align: center;
+      text-align: $text-center;
       margin-bottom: 14px;
       &:nth-last-child(1) {
         margin-bottom: 0;

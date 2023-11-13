@@ -30,15 +30,15 @@ const filterData = computed(() => {
             <div class="badge">
                 <ul>
                     <li>
-                        <p>1</p>
+                        <p data-num="1">1</p>
                         <p>分享</p>
                     </li>
                     <li>
-                        <p>2</p>
+                        <p data-num="2">2</p>
                         <p>收藏</p>
                     </li>
                     <li>
-                        <p>8</p>
+                        <p data-num="8">8</p>
                         <p>人數</p>
                     </li>
                 </ul>
@@ -79,7 +79,7 @@ const filterData = computed(() => {
 }
 
 header {
-    display: flex;
+    display: $d-flex;
     flex-direction: column;
     align-items: end;
     padding: 232px 192px 0 0;
@@ -87,13 +87,13 @@ header {
 
 .title {
     max-width: 414px;
-    text-align: center;
+    text-align: $text-center;
     padding-bottom: 248px;
 
     h2 {
-        font-size: 48px;
-        font-weight: bold;
-        letter-spacing: 16px;
+        font-size: $fz-3xl;
+        font-weight: $fw-bold;
+        letter-spacing: $text-spacing-m;
         margin-bottom: 24px;
     }
 
@@ -102,7 +102,7 @@ header {
         max-width: 414px;
         padding: 8px 20px;
         border-radius: 50px;
-        border: 1px solid rgba(69, 69, 69, 1);
+        border: 1px solid $gray;
         margin-bottom: 24px;
     }
 
@@ -111,13 +111,13 @@ header {
         max-width: 414px;
         padding: 8px 20px;
         border-radius: 50px;
-        border: 1px solid rgba(69, 69, 69, 1);
+        border: 1px solid $gray;
     }
 }
 
 @media (max-width: 768px) {
     header {
-        align-items: center;
+        align-items: $align-center;
         padding: 390px 0 0;
     }
 
@@ -134,29 +134,36 @@ header {
     }
 
     .title {
+        width: 100%;
         margin-top: 24px;
         padding-bottom: 24px;
 
         h2 {
-            font-size: 18px;
+            font-size: $fz-l;
         }
 
         #search {
             width: 100%;
             max-width: 350px;
+            font-size: $fz-m;
+            margin-bottom: 12px;
+            background: transparent;
         }
 
         .date {
             width: 100%;
             max-width: 350px;
+            font-size: $fz-m;
+            background: transparent;
         }
     }
 }
 
 .badge {
     padding: 0;
+
     ul {
-        display: flex;
+        display: $d-flex;
         padding: 0;
     }
 
@@ -165,15 +172,25 @@ header {
         border-radius: 8px 8px 0 0;
         background: rgba(228, 211, 204, 1);
         margin-left: 24px;
-        text-align: center;
+        text-align: $text-center;
 
         p {
-            font-size: 48px;
-            font-weight: bold;
-            color: rgba(200, 115, 54, 1);
+            font-size: $fz-3xl;
+            font-weight: $fw-bold;
+            color: $primary;
+            position: relative;
+            z-index: 1;
 
             &:nth-last-child(1) {
-                font-size: 14px;
+                font-size: $fz-s;
+            }
+
+            &::before {
+                content: attr(data-num);
+                position: absolute;
+                z-index: -1;
+                -webkit-text-stroke: 8px #fff;
+                text-stroke: 8px #fff;
             }
         }
     }
@@ -197,6 +214,12 @@ header {
 
             p {
                 font-size: 20px;
+                line-height: $line-h-m;
+                margin: 0;
+                &::before {
+                -webkit-text-stroke: 6px #fff;
+                text-stroke: 6px #fff;
+            }
             }
         }
     }
@@ -208,7 +231,7 @@ header {
     }
 
     .newsCard {
-        display: flex;
+        display: $d-flex;
         flex-wrap: wrap;
         padding-left: 0;
     }

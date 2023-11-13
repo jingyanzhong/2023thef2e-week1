@@ -2,7 +2,10 @@
 import NewsSwiper from '../components/NewsSwiper.vue'
 import DanteSwiper from '../components/DanteSwiper.vue'
 import { useDataStore } from '../stores/data.js'
+import { useIsActiveStore } from '../stores/isActive'
 import { storeToRefs } from 'pinia'
+const isActiveStore = useIsActiveStore()
+const { navActive } = isActiveStore
 const dataStore = useDataStore()
 const { newsData, danteData } = storeToRefs(dataStore)
 </script>
@@ -28,16 +31,16 @@ const { newsData, danteData } = storeToRefs(dataStore)
     <section class="news" data-aos="zoom-in-up" data-aos-duration="1000">
       <div class="container">
         <h4 class="none-m">最新消息</h4>
-        <RouterLink to="/news" class="none-m">
+        <RouterLink to="/news" class="more-btn none-m" @click="navActive('news')">
           MORE
           <span class="material-icons material-symbols-outlined">arrow_right</span>
         </RouterLink>
-        <div class="triangle"></div>
       </div>
       <div class="content">
+        <div class="triangle"></div>
         <h4 class="show-m">最新消息</h4>
         <NewsSwiper :card-item="newsData"></NewsSwiper>
-        <RouterLink to="/news" class="show-m">
+        <RouterLink to="/news" class="more-btn show-m" @click="navActive('news')">
           MORE
           <span class="material-icons material-symbols-outlined">arrow_right</span>
         </RouterLink>
@@ -51,16 +54,16 @@ const { newsData, danteData } = storeToRefs(dataStore)
             <img src="../img/icon1.png" alt="icon1">
             <p>為毛孩子謀福利！<br>推動寵物醫療保障方案</p>
           </li>
-          <li data-aos="flip-right" data-aos-duration="1000" data-aos-delay="1000">
+          <li data-aos="flip-right" data-aos-duration="1000" data-aos-delay="500">
             <img src="../img/icon2.png" alt="icon2">
             <p>打造休閒天堂！<br>推廣寵物休閒與娛樂場所</p>
           </li>
-          <li data-aos="flip-right" data-aos-duration="1000" data-aos-delay="2000">
+          <li data-aos="flip-right" data-aos-duration="1000" data-aos-delay="1000">
             <img src="../img/icon3.png" alt="icon3">
             <p>推廣寵物飼養教育<br>讓愛更加專業</p>
           </li>
         </ul>
-        <RouterLink to="/policy">
+        <RouterLink to="/policy" class="more-btn" @click="navActive('policy')">
           MORE
           <span class="material-icons material-symbols-outlined">arrow_right</span>
         </RouterLink>
@@ -68,15 +71,15 @@ const { newsData, danteData } = storeToRefs(dataStore)
     </section>
     <section class="donate">
       <div class="title">
-        <h4>您的小筆捐款<br>是每隻毛孩未來的大大動力！</h4>
+        <h4>您的小筆捐款<br>是每隻毛孩<span>未來的大大動力！</span></h4>
         <p>目前小額贊助總金額：987,655,873</p>
       </div>
       <div class="list">
         <DanteSwiper :dante-item="danteData"></DanteSwiper>
       </div>
-      <RouterLink to="/dante">
+      <RouterLink to="/dante" class="default-btn" @click="navActive('dante')">
         前往捐款
-          <span class="material-icons material-symbols-outlined">arrow_right</span>
+        <span class="material-icons material-symbols-outlined">arrow_right</span>
       </RouterLink>
     </section>
     <section class="form">
@@ -84,13 +87,12 @@ const { newsData, danteData } = storeToRefs(dataStore)
         <div class="title">
           <img class="none-m" src="../img/Line-l.png" alt="線條-左">
           <div class="text">
-            <h4>您的聲音，我們的行動！</h4>
+            <h4>您的聲音，<span>我們的行動！</span></h4>
             <p>親愛的鄉親，每一位市民的意見都是我們社區前進的原動力。<br>無論大小事，我都誠摯希望聽到您的建議。<br>分享您的想法，一同為我們的未來打造更美好！</p>
           </div>
           <img class="none-m" src="../img/Line-r.png" alt="線條-右">
         </div>
-        <form id="form" data-aos="flip-left"
-     data-aos-duration="2000">
+        <form id="form" data-aos="flip-left" data-aos-duration="2000">
           <label for="name" class="name">姓名</label>
           <input type="text" id="name" name="name" placeholder="請輸入中文或英文姓名"><br>
           <label for="mail" class="mail">E-mail</label>
@@ -99,7 +101,7 @@ const { newsData, danteData } = storeToRefs(dataStore)
           <input type="tel" id="phone" name="phone" placeholder="請輸入十位數字"><br>
           <label for="msg" class="msg">建言</label>
           <textarea name="message" id="msg" cols="30" rows="10" placeholder="請留下您的建言"></textarea><br>
-          <button type="submit">
+          <button type="submit" class="default-btn">
             送出
             <span class="material-icons material-symbols-outlined">arrow_right</span>
           </button>
@@ -121,9 +123,9 @@ const { newsData, danteData } = storeToRefs(dataStore)
 }
 
 h2 {
-  font-size: 48px;
-  font-weight: bold;
-  color: rgba(16, 94, 167, 1);
+  font-size: $fz-3xl;
+  font-weight: $fw-bold;
+  color: $secondary;
   text-align: center;
   margin-top: 106px;
   margin-bottom: 357px;
@@ -131,8 +133,8 @@ h2 {
 
 h4 {
   font-size: 32px;
-  font-weight: bold;
-  letter-spacing: 16px;
+  font-weight: $fw-bold;
+  letter-spacing: $text-spacing-m;
 }
 
 @media (max-width: 768px) {
@@ -143,26 +145,22 @@ h4 {
 
 @media (max-width: 767px) {
   .banner {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    z-index: -1;
     height: 550px;
     background: url(../img/home-bg.png) center;
     background-size: cover;
   }
 
   h2 {
-    font-size: 18px;
-    letter-spacing: 8px;
-    line-height: 36px;
+    font-size: $fz-l;
+    letter-spacing: $text-spacing-s;
+    line-height: $line-h-l;
     margin-top: 28px;
     margin-bottom: 58px;
   }
 
   h4 {
-    font-size: 24px;
+    font-size: $fz-xl;
+    line-height: $line-h-l;
   }
 }
 
@@ -170,32 +168,33 @@ h4 {
   padding: 83px 0;
 
   .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    display: $d-flex;
+    justify-content: $justify-center;
+    align-items: $align-center;
   }
 
   .name {
     h3 {
-      text-align: center;
-      font-size: 48px;
-      font-weight: bold;
+      text-align: $text-center;
+      font-size: $fz-3xl;
+      font-weight: $fw-bold;
       font-family: 'Noto Serif TC', serif;
-      line-height: 48px;
-      letter-spacing: 16px;
+      line-height: $line-h-xl;
+      letter-spacing: $text-spacing-m;
+      text-indent: 16px;
 
       span {
         font-size: 20px;
-        letter-spacing: 16px;
+        letter-spacing: $text-spacing-m;
         font-weight: 400;
         font-family: 'Noto Sans TC', sans-serif;
       }
     }
 
     h4 {
-      text-align: center;
+      text-align: $text-center;
       font-size: 20px;
-      letter-spacing: 16px;
+      letter-spacing: $text-spacing-m;
     }
   }
 
@@ -204,8 +203,8 @@ h4 {
     margin-left: 320px;
 
     h5 {
-      font-size: 24px;
-      letter-spacing: 8px;
+      font-size: $fz-xl;
+      letter-spacing: $text-spacing-s;
       margin-bottom: 36px;
     }
 
@@ -240,20 +239,21 @@ h4 {
       margin-bottom: 40px;
 
       h3 {
-        font-size: 24px;
-        line-height: 34px;
-        letter-spacing: 28px;
+        font-size: $fz-xl;
+        line-height: $line-h-l;
+        letter-spacing: $text-spacing-l;
+        text-indent: 28px;
         margin-bottom: 16px;
 
         span {
-          font-size: 16px;
-          line-height: 28px;
+          font-size: $fz-m;
+          line-height: $line-h-m;
           letter-spacing: 0;
         }
       }
 
       h4 {
-        font-size: 16px;
+        font-size: $fz-m;
         font-weight: 400;
         letter-spacing: 0;
       }
@@ -264,52 +264,44 @@ h4 {
       margin-left: 0;
 
       h5 {
-        font-size: 16px;
+        font-size: $fz-m;
         letter-spacing: 0;
         margin-bottom: 12px;
       }
 
       p {
+        font-size: $fz-m;
         margin-top: 12px;
-        line-height: 1.8;
+        line-height: $line-h-m;
       }
 
       hr {
         width: 70%;
-        border-bottom: 1px solid rgba(69, 69, 69, 1);
       }
     }
   }
 }
 
 .news {
-  position: relative;
   padding-top: 139px;
   margin-bottom: 80px;
 
   .container {
-    display: flex;
-    align-items: center;
-    position: relative;
-    // height: 65px;
+    display: $d-flex;
+    align-items: $align-center;
   }
 
   h4 {
     margin-right: auto;
-    font-weight: bold;
-    letter-spacing: 16px;
     margin-left: 175px;
   }
 
-  a {
-    letter-spacing: 16px;
-    color: rgba(69, 69, 69, 1);
-    transition: all .5s;
-    display: flex;
-
-    &:hover {
-      color: rgba(16, 94, 167, 1);
-    }
+  .content {
+    position: relative;
+    margin-left: 177px;
+    background: #fff;
+    padding: 120px 0 120px 120px;
+    border-radius: 100px 0 0 100px;
   }
 
   .triangle {
@@ -324,17 +316,10 @@ h4 {
       border-width: 0 104px 207px 104px;
       border-color: transparent transparent #fff transparent;
       position: absolute;
-      top: -139px;
-      left: 80px;
+      top: -205px;
+      left: 11%;
       z-index: -1;
     }
-  }
-
-  .content {
-    margin-left: 177px;
-    background: #fff;
-    padding: 120px 0 120px 120px;
-    border-radius: 100px 0 0 100px;
   }
 }
 
@@ -355,11 +340,12 @@ h4 {
 @media (max-width: 767px) {
   .news {
     padding-top: 60px;
+    margin-bottom: 20px;
 
     h4 {
       margin: 0;
       margin-bottom: 40px;
-      text-align: center;
+      text-align: $text-center;
     }
 
     a {
@@ -367,9 +353,9 @@ h4 {
     }
 
     .show-m {
-      display: flex !important;
-      justify-content: center;
-      text-align: center;
+      display: $d-flex !important;
+      justify-content: $justify-center;
+      text-align: $align-center;
     }
 
     .content {
@@ -395,23 +381,23 @@ h4 {
   margin-bottom: 80px;
 
   h4 {
-    text-align: center;
+    text-align: $text-center;
     margin-bottom: 80px;
   }
 
   ul {
-    display: flex;
+    display: $d-flex;
     flex-wrap: wrap;
-    justify-content: center;
+    justify-content: $justify-center;
     margin-bottom: 80px;
     padding: 0;
   }
 
   li {
-    display: flex;
+    display: $d-flex;
     flex-direction: column;
-    align-items: center;
-    text-align: center;
+    align-items: $align-center;
+    text-align: $text-center;
     padding: 0 110px;
 
     img {
@@ -421,16 +407,7 @@ h4 {
   }
 
   a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    letter-spacing: 16px;
-    color: rgba(69, 69, 69, 1);
-    transition: all .5s;
-
-    &:hover {
-      color: rgba(16, 94, 167, 1);
-    }
+    justify-content: $justify-center;
   }
 }
 
@@ -444,17 +421,29 @@ h4 {
 
 @media (max-width: 767px) {
   .policy {
+    h4 {
+      margin-bottom: 40px;
+    }
+
     ul {
       display: block;
       margin-bottom: 40px;
     }
 
     li {
+      &:nth-of-type(3) {
+        p {
+          margin-bottom: 0;
+        }
+      }
+
       img {
+        width: 100px;
         margin: 0 auto 40px;
       }
 
       p {
+        font-size: $fz-m;
         margin-bottom: 24px;
       }
     }
@@ -465,11 +454,11 @@ h4 {
   margin-bottom: 80px;
 
   .title {
-    text-align: center;
+    text-align: $text-center;
     margin-bottom: 80px;
 
     h4 {
-      text-align: center;
+      text-align: $text-center;
       margin-bottom: 24px;
     }
   }
@@ -478,28 +467,25 @@ h4 {
     margin-bottom: 80px;
   }
 
-  a {
-    width: 180px;
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
-    background: rgba(16, 94, 167, 1);
-    padding: 8px;
-    border-radius: 50px;
-    color: #fff;
-    text-align: center;
-    transition: all .5s;
-
-    &:hover {
-      background: rgba(200, 115, 54, 1);
-    }
-  }
 }
 
 @media (max-width: 767px) {
   .donate {
+    .title {
+      margin-bottom: 40px;
+    }
+
     h4 {
-      letter-spacing: 4px;
+      letter-spacing: $text-spacing-xs;
+      line-height: $line-h-l;
+
+      span {
+        display: block;
+      }
+    }
+
+    .list {
+      margin-bottom: 40px;
     }
   }
 }
@@ -508,9 +494,9 @@ h4 {
   margin-bottom: 80px;
 
   .title {
-    display: flex;
-    justify-content: center;
-    text-align: center;
+    display: $d-flex;
+    justify-content: $justify-center;
+    text-align: $text-center;
     margin-bottom: 64px;
 
     .text {
@@ -518,7 +504,7 @@ h4 {
     }
 
     p {
-      line-height: 1.8;
+      line-height: $line-h-m;
     }
   }
 
@@ -530,8 +516,8 @@ h4 {
     padding: 24px 0;
     background: #fff;
     border-radius: 24px;
-    border: 5px dotted rgba(200, 115, 54, 1);
-    text-align: center;
+    border: 5px dotted $primary;
+    text-align: $text-center;
 
     label {
       display: block;
@@ -543,7 +529,7 @@ h4 {
       margin: 0 auto;
       width: 414px;
       padding: 8px;
-      text-align: center;
+      text-align: $text-center;
     }
 
     textarea {
@@ -552,24 +538,9 @@ h4 {
     }
 
     button {
-      width: 180px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      margin: 0 auto;
-      background: rgba(16, 94, 167, 1);
-      padding: 8px;
-      border-radius: 50px;
-      color: #fff;
-      text-align: center;
-      transition: all .5s;
       border: none;
       cursor: pointer;
       margin-top: 24px;
-
-      &:hover {
-        background: rgba(200, 115, 54, 1);
-      }
     }
   }
 }
@@ -590,6 +561,22 @@ h4 {
 
 @media (max-width: 767px) {
   .form {
+    h4 {
+      line-height: 34px;
+
+      span {
+        display: block;
+      }
+    }
+
+    .title {
+      margin-bottom: 60px;
+
+      p {
+        text-align: start;
+      }
+    }
+
     #form {
       padding: 24px;
 

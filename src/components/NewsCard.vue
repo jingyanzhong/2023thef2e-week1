@@ -27,19 +27,20 @@ li {
 }
 
 .title {
-    display: flex;
-    align-items: center;
+    display: $d-flex;
+    align-items: $align-center;
 
     .date {
-        background: rgba(200, 115, 54, 1);
+        background: $primary;
         padding: 8px 25px 8px 25px;
         color: #fff;
-        text-align: center;
+        text-align: $text-center;
         margin-right: auto;
 
         .num {
-            font-size: 48px;
-            font-weight: bold;
+            font-size: $fz-3xl;
+            font-weight: $fw-bold;
+            line-height: 56px;
             position: relative;
             z-index: 2;
 
@@ -47,20 +48,23 @@ li {
                 content: attr(data-num);
                 position: absolute;
                 z-index: -1;
-                -webkit-text-stroke: 6px rgba(69, 69, 69, 1);
-                text-stroke: 6px rgba(69, 69, 69, 1);
+                -webkit-text-stroke: 6px $gray;
+                text-stroke: 6px $gray;
             }
 
         }
+
         p {
             padding: 0;
+            margin: 0;
         }
     }
 }
 
 h5 {
-    font-size: 18px;
-    letter-spacing: 8px;
+    font-size: $fz-l;
+    line-height: $line-h-m;
+    letter-spacing: $text-spacing-s;
     text-align: end;
 }
 
@@ -69,7 +73,8 @@ img {
 }
 
 p {
-    line-height: 1.8;
+    font-size: $fz-m;
+    line-height: $line-h-m;
     padding: 20px 16px;
 }
 
@@ -77,12 +82,40 @@ p {
     li {
         width: calc(50% - 24px);
     }
+
+    p {
+        padding: 16px 8px;
+    }
 }
 
 @media (max-width: 767px) {
+    .title {
+        flex-direction: column;
+        align-items: $align-center;
+        margin-bottom: 12px;
+
+        .date {
+            margin-right: 0;
+            margin-bottom: 16px;
+            padding: 8px 16px;
+
+            .num {
+                font-size: 20px;
+                line-height: $line-h-m;
+            }
+        }
+    }
+
     li {
         width: 100%;
-        margin: 0 12px 24px;
+        margin: 0 0 24px;
     }
-}
-</style>
+
+    p {
+        padding: 16px 0;
+    }
+
+    h5 {
+        text-align: $text-center;
+    }
+}</style>
