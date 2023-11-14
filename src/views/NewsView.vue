@@ -55,6 +55,9 @@ const filterData = computed(() => {
 </template>
 
 <style lang="scss" scoped>
+.container {
+    max-width: 1600px;
+}
 .banner {
     position: absolute;
     top: 0;

@@ -243,7 +243,6 @@ h4 {
         line-height: $line-h-l;
         letter-spacing: $text-spacing-l;
         text-indent: 28px;
-        margin-bottom: 16px;
 
         span {
           font-size: $fz-m;
